@@ -14,7 +14,7 @@ setInterval(createHeart, 300);
 
 // Efeito de digitação dinâmico
 const title = document.querySelector('.title');
-const phrases = ["Para Você", "Meu Amor", "Minha Vida"];
+const phrases = ["Para  Você", "Meu  Amor", "Minha  Vida"];
 let phraseIndex = 0;
 
 function typeWriter() {
