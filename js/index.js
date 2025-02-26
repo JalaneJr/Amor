@@ -1,20 +1,16 @@
-// Animação de corações
-function createHeart() {
-  const heart = document.createElement('div');
-  heart.classList.add('heart');
-  heart.innerHTML = '❤️';
-  heart.style.left = Math.random() * 100 + 'vw';
-  heart.style.animationDuration = Math.random() * 3 + 2 + 's';
-  document.body.appendChild(heart);
-  
-  setTimeout(() => heart.remove(), 5000);
-}
+
 
 setInterval(createHeart, 300);
 
 // Efeito de digitação dinâmico
 const title = document.querySelector('.title');
-const phrases = ["Para  Você", "Meu  Amor", "Minha  Vida"];
+const phrases = ["Minha flor","Meu  Amor", "Minha  Vida"];
+
+
+function mostrarMensagem() {
+  const randomIndex = Math.floor(Math.random() * mensagens.length);
+  document.getElementById('mensagem').textContent = mensagens[randomIndex];
+}
 let phraseIndex = 0;
 
 function typeWriter() {

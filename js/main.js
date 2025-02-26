@@ -3,7 +3,7 @@ onload = () => {
   const c = setTimeout(() => {
     document.body.classList.remove("not-loaded");
 
-    const titles = ('I LOVE YOU').split('')
+    //const titles = ('I LOVE YOU').split('')
     const titleElement = document.getElementById('title');
     let index = 0;
 
@@ -20,44 +20,52 @@ onload = () => {
     clearTimeout(c);
   }, 1000);
 };
-// Controles de música
-const music = document.getElementById('background-music');
-const playBtn = document.getElementById('play-btn');
-const pauseBtn = document.getElementById('pause-btn');
-const volumeUp = document.getElementById('volume-up');
-const volumeDown = document.getElementById('volume-down');
+const musicPlayer = document.getElementById("background-music");
+  const playBtn = document.getElementById("play-btn");
+  const pauseBtn = document.getElementById("pause-btn");
+  const nextBtn = document.getElementById("next-btn");
+  const prevBtn = document.getElementById("prev-btn");
+  const volumeUp = document.getElementById("volume-up");
+  const volumeDown = document.getElementById("volume-down");
 
-// Reproduzir música
-playBtn.addEventListener('click', () => {
-  music.play();
-  playBtn.style.display = 'none';
-  pauseBtn.style.display = 'inline-block';
-});
+  // Lista de músicas
+  const playlist = [
+    
+    "music/MAJOR feat NSTASIA Why I Love You.mp3",
+    "music/Gerilson Insrael- Minha Vida [Official Vídeo] - Gerilson Insrael.mp3",
+    "music/Doppaz  Eu jurarei.mp3",
+    "music/Cef Tanzy - Escola (Áudio Oficial) - Cef Tanzy.mp3",
+    "music/Edgar Domingos - Senhor Incrível - Clé Entertainment.mp3",
+    "music/Gerilson_Insrael_Casa_Comigo_Official_Video_Kizomba_Vidisco.mp3",
+    "music/08. Cef Tanzy - Botão de Rosa - MOWIGANG Music.mp3",
+   "music/Michael_Gerow_Rewrite_The_Stars_Official_Lyric_Video_Michael_Gerow.mp3",
+   "music/Sam_Smith_-_How_To_Cry__Lyric_Video_(256k).mp3",
+  ];
 
-// Pausar música
-pauseBtn.addEventListener('click', () => {
-  music.pause();
-  pauseBtn.style.display = 'none';
-  playBtn.style.display = 'inline-block';
-});
+  let currentTrack = 0;
 
-// Aumentar volume
-volumeUp.addEventListener('click', () => {
-  if(music.volume < 1) music.volume += 0.1;
-});
+  function loadTrack(trackIndex) {
+    musicPlayer.src = playlist[trackIndex];
+    musicPlayer.play();
+  }
 
-// Diminuir volume
-volumeDown.addEventListener('click', () => {
-  if(music.volume > 0) music.volume -= 0.1;
-});
-
-// Iniciar música automaticamente (opcional)
-window.addEventListener('load', () => {
-  music.play().then(() => {
-    playBtn.style.display = 'none';
-    pauseBtn.style.display = 'inline-block';
-  }).catch(() => {
-    // Autoplay bloqueado, mostra o botão play
-    playBtn.style.display = 'inline-block';
+  playBtn.addEventListener("click", () => {
+    musicPlayer.play();
   });
-});
+
+  pauseBtn.addEventListener("click", () => {
+    musicPlayer.pause();
+  });
+
+  nextBtn.addEventListener("click", () => {
+    currentTrack = (currentTrack + 1) % playlist.length;
+    loadTrack(currentTrack);
+  });
+
+  prevBtn.addEventListener("click", () => {
+    currentTrack = (currentTrack - 1 + playlist.length) % playlist.length;
+    loadTrack(currentTrack);
+  });
+
+  // Carregar a primeira música automaticamente
+  loadTrack(currentTrack);
